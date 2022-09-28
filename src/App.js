@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 function App() {
   return (
     <Fragment>
-      <Header/>
+      <h2>buceta</h2>
     </Fragment>
   );
 }
