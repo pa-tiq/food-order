@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-
+import Header from "./components/Layout/Header";
 
 function App() {
   return (
     <Fragment>
-      <h2>buceta</h2>
+      <Header/>
     </Fragment>
   );
 }
