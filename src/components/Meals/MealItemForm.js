@@ -1,27 +1,28 @@
-import React, {Fragment, useState} from 'react';
-import classes from "./HeaderCartButton.module.css";
-import CartIcon from "../Cart/CartIcon";
-import Input from '../UI/Input';
+import React from "react";
+import classes from "./MealItemForm.module.css";
+import Input from "../UI/Input";
 
-const MealItemForm = () => {
-
-  const [amount, setAmount] = ueState(0);
-  
-  const amountChangeHandler = (e) => {
-    setAmount(e.target.value);
-  };
+const MealItemForm = (props) => {
+  //const [amount, setAmount] = useState(0);
+  //const amountChangeHandler = (e) => {
+  //  setAmount(e.target.value);
+  //};
 
   return (
-    <Form>
-      <Input className={classes.form}
-        type='number'
-        min='0'
-        max='10'
-        onChange={amountChangeHandler}
-        value={amount}
+    <form className={classes.form}>
+      <Input
+        label="Amount"
+        input={{
+          id: "amount" + props.id,
+          type: "number",
+          min: "1",
+          max: "5",
+          step: "1",
+          defaultValue: "1",
+        }}
       />
-      <button className={classes.button}></button>
-    </Form>
+      <button>+ Add</button>
+    </form>
   );
 };
 
