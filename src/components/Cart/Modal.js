@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Card from "../UI/Card";
 import classes from "./Modal.module.css";
 
 const Backdrop = (props) => {
