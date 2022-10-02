@@ -2,13 +2,7 @@ import classes from './Cart.module.css';
 
 const CartItem = (props) => {
 
-  const cartItems = (
-    <ul>
-      {[{ id: "c1", name: "Sushi", amount: 2, price: 12.99 }].map((item) => (
-        <li>{item.name}</li>
-      ))}
-    </ul>
-  );
+
   const price = `$${props.price.toFixed(2)}`;
 
   return (
