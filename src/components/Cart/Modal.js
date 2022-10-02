@@ -4,7 +4,7 @@ import Card from "../UI/Card";
 import classes from "./Modal.module.css";
 
 const Backdrop = (props) => {
-  return <div className={classes.backdrop} />;
+  return <div className={classes.backdrop} onClick={props.onHideCart} />;
 };
 
 const ModalOverlay = (props) => {
@@ -22,7 +22,7 @@ const Modal = (props) => {
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
-        <Backdrop/>,
+        <Backdrop onHideCart={props.onHideCart}/>,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(

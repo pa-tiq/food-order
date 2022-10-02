@@ -12,7 +12,7 @@ const Cart = (props) => {
   );
 
   return (
-    <Modal>
+    <Modal onHideCart={props.onHideCart}>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
