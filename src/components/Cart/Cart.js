@@ -4,21 +4,12 @@ import Modal from "./Modal";
 import CartContext from "../../store/cart-context";
 import CartItem from "./CartItem";
 
-const calculateTotalPrice = (items) => {
-  return items
-    .reduce((currentNumber, item) => {
-      return currentNumber + item.price * item.amount;
-    }, 0)
-    .toFixed(2);
-};
-
 const Cart = (props) => {
   const cartContext = useContext(CartContext);
   const hasItems = cartContext.items.length > 0;
 
   const cartItemAddHandler = (item) => {
-    item.amout = 1;
-    cartContext.addItem(item);
+    cartContext.addItem({ ...item, amount: 1 });
   };
   const cartItemRemoveHandler = (id) => {
     cartContext.removeItem(id);
@@ -44,7 +35,7 @@ const Cart = (props) => {
       {cartItems}
       <div className={classes.total}>
         <span>Total Price</span>
-        <span>{calculateTotalPrice(cartContext.items)}</span>
+        <span>{cartContext.totalAmount.toFixed(2)}</span>
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={props.onHideCart}>

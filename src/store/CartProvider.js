@@ -8,30 +8,43 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
+    const updatedTotalAmount =
+      state.totalAmount + action.item.price * action.item.amount;
     let updatedItems = [];
-    const itemAlreadyInCart = state.items.findIndex((item) => item.id === action.item.id);
-    if(itemAlreadyInCart >= 0){
-      updatedItems = state.items.concat();
-      updatedItems[itemAlreadyInCart].amount += action.item.amount;
-    }
-    else{
+    const indexItemAlreadyInCart = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    if (indexItemAlreadyInCart >= 0) {
+      updatedItems = [...state.items];
+      updatedItems[indexItemAlreadyInCart].amount += action.item.amount;
+      console.log("amount ", updatedItems[indexItemAlreadyInCart].amount);
+    } else {
       updatedItems = state.items.concat(action.item); //concat generates a new array
     }
-    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
     return {
-      items:updatedItems,
-      totalAmount:updatedTotalAmount
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
+  } else if (action.type === "REMOVE") {
+    let updatedItems = [];
+    const itemIndexToRemove = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const updatedTotalAmount =
+      state.totalAmount - state.items[itemIndexToRemove].price;
+    if (state.items[itemIndexToRemove].amount === 1) {
+      updatedItems = state.items.filter((item) => {
+        return item.id !== action.id;
+      });
+    } else {
+      updatedItems = [...state.items];
+      updatedItems[itemIndexToRemove].amount -= 1;
     }
-  }
-  else if(action.type === "REMOVE"){
-    const updatedItems = state.items.filter((item) => {
-      return item.id != action.id;
-    });
     return {
-      items:updatedItems,
-    }
-  }
-  return defaultCartState;
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
+  } else return defaultCartState;
 };
 
 const CartProvider = (props) => {
